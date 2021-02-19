@@ -146,18 +146,31 @@ HTTP_STATUS_CODE=$(
         --data-urlencode "msg=${FINAL_MESSAGE_TO_SEND}"
 )
 
-# Codes réponse HTTP possibles
-# 200 : Le SMS a été envoyé sur votre mobile.
-# 400 : Un des paramètres obligatoires est manquant.
-# 402 : Trop de SMS ont été envoyés en trop peu de temps.
-# 403 : Le service n'est pas activé sur l'espace abonné, ou login / clé
-#       incorrect.
-# 500 : Erreur côté serveur. Veuillez réessayez ultérieurement.
-
-if [ "${HTTP_STATUS_CODE}" -eq 200 ]; then
-    # echo "API responded with 200: exiting with 0" #DEBUG
-    exit 0
-else
-    echo "Error: API responded with ${HTTP_STATUS_CODE}"
-    exit 1
-fi
+# Le code de retour ne peut excéder 255,
+#    on le raccourcit en supprimant le chiffre central
+case ${HTTP_STATUS_CODE} in
+    200)
+        # echo '200 : Le SMS a été envoyé sur votre mobile.' #DEBUG
+        exit 0
+        ;;
+    400)
+        >&2 echo 'Erreur 400 : Un des paramètres obligatoires est manquant.'
+        exit 40
+        ;;
+    402)
+        >&2 echo 'Erreur 402 : Trop de SMS ont été envoyés en trop peu de temps.'
+        exit 42
+        ;;
+    403)
+        >&2 echo "Erreur 403 : Le service n'est pas activé sur l'espace abonné, ou login / clé incorrect."
+        exit 43
+        ;;
+    500)
+        >&2 echo 'Erreur 500 : Erreur côté serveur. Veuillez réessayer ultérieurement.'
+        exit 50
+        ;;
+    *)
+        >&2 echo "Error ${HTTP_STATUS_CODE} : erreur inconnue."
+        exit "${HTTP_STATUS_CODE}"
+        ;;
+esac
