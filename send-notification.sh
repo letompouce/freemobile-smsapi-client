@@ -135,7 +135,7 @@ FINAL_MESSAGE_TO_SEND="${MESSAGE_HEADER}${MESSAGE_TO_SEND}${MESSAGE_FOOTER}"
 # * Renvoi le code réponse HTTP uniquement :
 #       --write-out "%{http_code}" --silent --output /dev/null
 #
-HTTP_STATUS_CODE=$(\
+HTTP_STATUS_CODE=$(
     curl \
         --write-out "%{http_code}" \
         --silent \
@@ -143,7 +143,7 @@ HTTP_STATUS_CODE=$(\
         --get "${SMSAPI_BASEURL}/${SMSAPI_SEND_ACTION}" \
         --data "user=${USER_LOGIN}" \
         --data "pass=${API_KEY}" \
-        --data-urlencode "msg=${FINAL_MESSAGE_TO_SEND}" \
+        --data-urlencode "msg=${FINAL_MESSAGE_TO_SEND}"
 )
 
 # Codes réponse HTTP possibles
