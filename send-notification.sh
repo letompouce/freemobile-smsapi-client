@@ -1,4 +1,5 @@
 #!/bin/sh
+#shellcheck disable=SC1090
 
 #
 # Script d'envoi de notification SMS via l'API Free Mobile
@@ -12,8 +13,8 @@
 
 set -eu
 
-readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly PROGNAME=$( basename "$0" )
+readonly PROGDIR=$( readlink -m "$(dirname "$0")" )
 
 usage_error () {
     echo "ERROR: ${1}" >&2
@@ -38,6 +39,7 @@ while getopts "c:h" option; do
         c) CONFIG_FILE=${OPTARG} ;;
         :) usage_error "Invalid arguments" ;;
         h) usage_help ; exit 0 ;;
+        *) usage_error "Invalid argument" ;;
     esac
 done
 shift $((OPTIND-1))
