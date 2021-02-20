@@ -47,10 +47,6 @@ shift $((OPTIND-1))
 ## Configuration système
 ##
 
-# Caractère de fin de ligne
-# (http://en.wikipedia.org/wiki/Percent-encoding#Character_data)
-NEWLINE_CHAR="%0D" # Valeurs possibles : %0A, %0D et %0D%0A
-
 # URL d'accès à l'API
 SMSAPI_BASEURL="https://smsapi.free-mobile.fr"
 
