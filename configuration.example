@@ -1,0 +1,17 @@
+# Login utilisateur / identifiant Free Mobile
+#   celui utilisé pour accéder à l'Espace Abonné
+USER_LOGIN="12345678"
+
+# Clé d'identification
+#   générée et fournie par Free Mobile via l'Espace Abonné, "Mes Options"
+# https://mobile.free.fr/moncompte/index.php?page=options)
+API_KEY="abcdefg1234567"
+
+# Texte qui sera ajouté AVANT chaque message envoyé
+MESSAGE_HEADER="Notification :
+"
+
+# Texte qui sera ajouté APRÈS chaque message envoyé
+MESSAGE_FOOTER="
+--
+$( hostname -f )"
