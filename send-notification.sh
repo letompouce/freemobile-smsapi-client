@@ -115,15 +115,10 @@ fi
 ## Traitement du message
 ##
 
-MESSAGE_TO_SEND=""
-if [ $# -ge 1 ] && [ "${1}" ]; then # Message en tant qu'argument de la ligne de commande
+if [ -n "$*" ]; then # Message en tant qu'argument de la ligne de commande
     MESSAGE_TO_SEND="${1}"
 else # Message lu de STDIN
-    while read line
-    do
-        MESSAGE_TO_SEND="${MESSAGE_TO_SEND}${line}\n"
-    done
-    MESSAGE_TO_SEND=${MESSAGE_TO_SEND%"\n"} # Retire le dernier saut de ligne
+    MESSAGE_TO_SEND="$( cat )"
 fi
 
 # Assemble header, message et footer
