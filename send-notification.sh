@@ -6,7 +6,7 @@
 #
 # Auteur: DUVERGIER Claude (http://claude.duvergier.fr)
 #
-# Nécessite: sh et wget
+# Nécessite: sh, curl
 #
 # Possible usages: see usage_help()
 
